@@ -14,11 +14,14 @@
       <button @click="login();">LOGIN</button>
       {{requestLogin.username}} + {{requestLogin.password}}
     </div>
+    <About :username="requestLogin.username"></About>
   </div>
 </template>
 
 <script lang="ts">
+import About from '@/pages/About.vue';
 import { RequestLogin } from '../models/requestLogin';
+import loginService from '../services/login.service';
 
 const logoImg = require('../assets/logo.png');
 
@@ -30,9 +33,26 @@ export default {
       requestLogin: {} as RequestLogin,
     };
   },
+  components: {
+    About,
+  },
   methods: {
     login() {
-      alert(this.requestLogin.username);
+      console.log(this);
+      // loginService.login();
+      // await loginService.login(self.requestLogin);
+
+      // .then((res) => {
+      //   if (res.status === 200) {
+      //     alert('success');
+      //     self.$router.push({ name: 'home' });
+      //   } else {
+      //     alert(res.status);
+      //   }
+      // }).catch((err) => {
+      //   console.log(err);
+      //   alert('error');
+      // });
     },
   },
 };
