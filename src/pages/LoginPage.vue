@@ -38,19 +38,18 @@ export default {
   methods: {
     login() {
       console.log(this);
-      loginService.login(this.requestLogin);
-
-      // .then((res) => {
-      //   if (res.status === 200) {
-      //     alert('success');
-      //     self.$router.push({ name: 'home' });
-      //   } else {
-      //     alert(res.status);
-      //   }
-      // }).catch((err) => {
-      //   console.log(err);
-      //   alert('error');
-      // });
+      loginService.login(this.requestLogin)
+      .then((res) => {
+        if (res.status === 200) {
+          alert('success');
+          this.$router.push({ name: 'home' });
+        } else {
+          alert(res.status);
+        }
+      }).catch((err) => {
+        console.log(err);
+        alert('error');
+      });
     },
   },
 };
