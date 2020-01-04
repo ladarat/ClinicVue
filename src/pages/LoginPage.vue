@@ -11,7 +11,7 @@
         password
         <input type="password" v-model="requestLogin.password" />
       </div>
-      <button @click="login();">LOGIN</button>
+      <button @click="login()">LOGIN</button>
       {{requestLogin.username}} + {{requestLogin.password}}
     </div>
     <About :username="requestLogin.username"></About>
