@@ -29,8 +29,7 @@ export default {
   name: 'login',
   data() {
     return {
-      logoImg,
-      requestLogin: {} as RequestLogin,
+      logoImg, requestLogin: {} as RequestLogin,
     };
   },
   components: {
@@ -39,8 +38,7 @@ export default {
   methods: {
     login() {
       console.log(this);
-      // loginService.login();
-      // await loginService.login(self.requestLogin);
+      loginService.login(this.requestLogin);
 
       // .then((res) => {
       //   if (res.status === 200) {
