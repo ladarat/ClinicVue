@@ -1,4 +1,4 @@
-# clinic-v3
+# clinicVue
 
 ## Project setup
 ```
