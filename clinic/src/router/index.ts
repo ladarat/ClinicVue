@@ -9,10 +9,11 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    redirect: '/app/menu',
+    redirect: '/login',
   },
   {
     path: '/login',
+    name: 'login',
     component: Login,
   },
   {
@@ -21,6 +22,7 @@ const routes = [
     children: [
       {
         path: 'menu',
+        name: 'menu',
         component: Menu
       }
     ]
@@ -28,6 +30,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
+  mode: 'history',
   routes
 })
 
