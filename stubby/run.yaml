@@ -1,0 +1,10 @@
+- request:
+    method: POST
+    url: /login
+  response:
+    status: 200
+    headers:
+      content-type: application/json
+      Access-Control-Allow-Origin: "*"
+    body: >
+         {"status" : "OK"}
