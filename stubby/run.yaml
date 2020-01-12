@@ -1,10 +1,14 @@
-- request:
-    method: POST
-    url: /login
-  response:
-    status: 200
-    headers:
-      content-type: application/json
-      Access-Control-Allow-Origin: "*"
-    body: >
-         {"status" : "OK"}
+-  request:
+      method: POST
+      url: /login
+      headers:
+         content-type: application/json
+      post: >
+         {"username":"ladarat","password":"1234"}
+
+   response:
+      headers:
+         content-type: application/json
+      status: 200
+      body: >
+         {"userId": "aa23"}
