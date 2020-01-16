@@ -9,6 +9,7 @@
    response:
       headers:
          content-type: application/json
+         Access-Content-Allow-Origin: "*"
       status: 200
       body: >
          {"userId": "aa23"}
