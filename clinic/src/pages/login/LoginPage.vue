@@ -16,9 +16,11 @@
 
 <script lang="ts">
 import Vue from "vue";
+import Component from 'vue-class-component';
 import UserService from "../../common/api/modules/user/user.service";
 import LoginRequest from "../../common/api/modules/user/models/LoginRequest";
 
+@Component
 export default class LoginPage extends Vue {
   loginTitle: string = "เข้าสู่ระบบ";
   usernameTitle: string = "User Name:";
@@ -32,7 +34,7 @@ export default class LoginPage extends Vue {
       password: this.password
     }
     UserService.login(request).then(() => {
-
+      this.$router.push({ name: 'menu' })
     })
   }
 }
