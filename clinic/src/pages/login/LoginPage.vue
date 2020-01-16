@@ -17,7 +17,7 @@
 <script lang="ts">
 import Vue from "vue";
 import UserService from "../../common/api/modules/user/user.service";
-import LoginRequest from "../../common/api/modules/user/models/loginRequest";
+import LoginRequest from "../../common/api/modules/user/models/LoginRequest";
 
 export default class LoginPage extends Vue {
   loginTitle: string = "เข้าสู่ระบบ";
@@ -31,7 +31,9 @@ export default class LoginPage extends Vue {
       username: this.username,
       password: this.password
     }
-    UserService.login(request)
+    UserService.login(request).then(() => {
+
+    })
   }
 }
 </script>
