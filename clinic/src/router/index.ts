@@ -18,8 +18,12 @@ const routes = [
   {
     path: '/menu',
     name: 'menu',
-    component: MenuPage
-    // component: () => import('@/pages/menu/MenuPage.vue')
+    component: () => import('@/pages/menu/MenuPage.vue')
+  },
+  {
+    path: '/patient/search',
+    name: 'patient_search',
+    component: () => import('@/pages/patient/search/PatientSearchPage.vue')
   }
 ]
 

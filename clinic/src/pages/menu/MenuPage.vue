@@ -1,14 +1,18 @@
 <template>
   <div class="menu-page">
-    <div>
-      {{ menuTitle }}
-    </div>
-    <div>
-      <template v-for="(menu, menuIndex) in menuList">
-        <div :key="`menu-${menuIndex}`">
-          {{menu.title}}
-        </div>
-      </template>
+    <div class="text-center">
+      <div>
+        {{ menuTitle }}
+      </div>
+      <div>
+        <template v-for="(menu, menuIndex) in menuList">
+          <router-link :to="{ name: menu.to }" :key="`menu-${menuIndex}`">
+            <div>
+              {{menu.title}}
+            </div>
+          </router-link>
+        </template>
+      </div>
     </div>
   </div>
 </template>
@@ -23,7 +27,7 @@ export default class MenuPage extends Vue {
   menuList = [
     {
       title: 'ค้นหาผู้ป่วย',
-      to: ''
+      to: 'patient_search'
     },
     {
       title: 'เพิ่มข้อมูลผู้ป่วย',
