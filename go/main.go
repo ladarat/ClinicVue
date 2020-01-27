@@ -1,15 +1,22 @@
 package main
 
 import (
+	"log"
+
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
-
+	mongo "github.com/ladarat/ClinicVue/go/mongo"
 	routes "github.com/ladarat/ClinicVue/go/routers"
 	"github.com/ladarat/ClinicVue/go/services"
 )
 
 func main() {
 
+	db, err := mongo.NewDatabase()
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+	
 	e := echo.New()
 
 	e.Use(middleware.Logger())
@@ -21,7 +28,7 @@ func main() {
 		AllowCredentials: true,
 	}))
 
-	patientService := services.NewPatientService()
+	patientService := services.NewPatientService(db)
 
 	routes := routes.Routes{
 		E:       e,

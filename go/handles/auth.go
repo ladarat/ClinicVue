@@ -26,7 +26,7 @@ func Login() echo.HandlerFunc {
 			return err
 		}
 		if err = c.Validate(u); err != nil {
-			return echo.NewHTTPError(http.StatusUnauthorized, err.Error())
+			return echo.NewHTTPError(http.StatusExpectationFailed, err.Error())
 		}
 
 		ur := LoginResponse{UserID: "aa23"}

@@ -6,67 +6,127 @@ import (
 
 	"github.com/labstack/echo"
 	services "github.com/ladarat/ClinicVue/go/services"
+
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 // Now is time now
 var Now = time.Now()
 
-// PatientRequest struct 
+// PatientRequest struct
 type PatientRequest struct {
-	ID                uint   `json:"id"`
-	Firstname         string `json:"firstname"`
-	Lastname          string `json:"lastname"`
-	Nickname          string `json:"nickname"`
-	Sex               string `json:"sex"`
-	Career            string `json:"career"`
-	PhoneNumber       string `json:"phone_number"`
-	CurrentAddress    string `json:"current_address"`
-	WorkAddress       string `json:"work_address"`
-	RequiredDocuments string `json:"required_documents"`
-	CongenitalDisease string `json:"congenital_disease"`
-	DrugAllergy       string `json:"drug_allergy"`
-	EmergencyContact  string `json:"emergency_contact"`
-	Relationship      string `json:"relationship"`
+	ID                primitive.ObjectID `json:"id"`
+	Firstname         string             `json:"firstname"`
+	Lastname          string             `json:"lastname"`
+	Nickname          string             `json:"nickname"`
+	Sex               string             `json:"sex"`
+	Career            string             `json:"career"`
+	PhoneNumber       string             `json:"phone_number"`
+	CurrentAddress    string             `json:"current_address"`
+	WorkAddress       string             `json:"work_address"`
+	RequiredDocuments string             `json:"required_documents"`
+	CongenitalDisease string             `json:"congenital_disease"`
+	DrugAllergy       string             `json:"drug_allergy"`
+	EmergencyContact  string             `json:"emergency_contact"`
+	Relationship      string             `json:"relationship"`
 }
 
 // PatientResponse struct
 type PatientResponse struct {
-	ID                uint   `json:"id"`
-	Firstname         string `json:"firstname"`
-	Lastname          string `json:"lastname"`
-	Nickname          string `json:"nickname"`
-	Sex               string `json:"sex"`
-	Career            string `json:"career"`
-	PhoneNumber       string `json:"phone_number"`
-	CurrentAddress    string `json:"current_address"`
-	WorkAddress       string `json:"work_address"`
-	RequiredDocuments string `json:"required_documents"`
-	CongenitalDisease string `json:"congenital_disease"`
-	DrugAllergy       string `json:"drug_allergy"`
-	EmergencyContact  string `json:"emergency_contact"`
-	Relationship      string `json:"relationship"`
+	ID                primitive.ObjectID `json:"id"`
+	Firstname         string             `json:"firstname"`
+	Lastname          string             `json:"lastname"`
+	Nickname          string             `json:"nickname"`
+	Sex               string             `json:"sex"`
+	Career            string             `json:"career"`
+	PhoneNumber       string             `json:"phone_number"`
+	CurrentAddress    string             `json:"current_address"`
+	WorkAddress       string             `json:"work_address"`
+	RequiredDocuments string             `json:"required_documents"`
+	CongenitalDisease string             `json:"congenital_disease"`
+	DrugAllergy       string             `json:"drug_allergy"`
+	EmergencyContact  string             `json:"emergency_contact"`
+	Relationship      string             `json:"relationship"`
 }
 
 // CreatePatient by POST /patient
 func CreatePatient(ps services.PatientService) echo.HandlerFunc {
 	return func(c echo.Context) error {
-		version, err := toPatient(c)
+		patient, err := toPatient(c)
 		if err != nil {
-			return echo.NewHTTPError(http.StatusUnauthorized, err.Error())
+			return echo.NewHTTPError(http.StatusExpectationFailed, err.Error())
 		}
-		err = ps.Create(version)
+		_, err = ps.Create(patient)
 		if err != nil {
-			return echo.NewHTTPError(http.StatusUnauthorized, err.Error())
+			return echo.NewHTTPError(http.StatusExpectationFailed, err.Error())
 		}
 
-		return c.JSON(http.StatusOK, toPatientJSON(version))
+		return c.JSON(http.StatusCreated, toPatientJSON(patient))
+	}
+}
+
+// GetPatientAll by GET /patient
+func GetPatientAll(ps services.PatientService) echo.HandlerFunc {
+	return func(c echo.Context) error {
+		patients, err := ps.GetAll()
+		if err != nil {
+			return echo.NewHTTPError(http.StatusExpectationFailed, err.Error())
+		}
+
+		jsons := []PatientResponse{}
+		for _, p := range patients {
+			jsons = append(jsons, toPatientJSON(&p))
+		}
+
+		return c.JSON(http.StatusOK, jsons)
+	}
+}
+
+// GetPatientByID by GET /patient/:id
+func GetPatientByID(ps services.PatientService) echo.HandlerFunc {
+	return func(c echo.Context) error {
+		id := c.Param("id")
+		patient, err := ps.GetByID(id)
+		if err != nil {
+			return echo.NewHTTPError(http.StatusExpectationFailed, err.Error())
+		}
+		return c.JSON(http.StatusOK, toPatientJSON(patient))
+	}
+}
+
+// UpdatePatient by PUT /patient
+func UpdatePatient(ps services.PatientService) echo.HandlerFunc {
+	return func(c echo.Context) error {
+		patient, err := toPatient(c)
+		if err != nil {
+			return echo.NewHTTPError(http.StatusExpectationFailed, err.Error())
+		}
+
+		err = ps.Update(patient)
+		if err != nil {
+			return echo.NewHTTPError(http.StatusExpectationFailed, err.Error())
+		}
+
+		return c.JSON(http.StatusOK, toPatientJSON(patient))
+	}
+}
+
+// DeletePatient by DELETE /patient/:id
+func DeletePatient(ps services.PatientService) echo.HandlerFunc {
+	return func(c echo.Context) error {
+		id := c.Param("id")
+		err := ps.Delete(id)
+		if err != nil {
+			return echo.NewHTTPError(http.StatusExpectationFailed, err.Error())
+		}
+		return c.NoContent(http.StatusNoContent)
 	}
 }
 
 func toPatient(c echo.Context) (*services.Patient, error) {
 	var patientReq PatientRequest
 	if err := c.Bind(&patientReq); err != nil {
-		return nil, echo.NewHTTPError(http.StatusUnauthorized, err.Error())
+		return nil, echo.NewHTTPError(http.StatusExpectationFailed, err.Error())
 	}
 
 	var patient services.Patient
@@ -89,7 +149,7 @@ func toPatient(c echo.Context) (*services.Patient, error) {
 }
 
 func toPatientJSON(p *services.Patient) PatientResponse {
-	var json PatientResponse
+	json := PatientResponse{}
 	json.ID = p.ID
 	json.Nickname = p.Nickname
 	json.Firstname = p.Firstname
