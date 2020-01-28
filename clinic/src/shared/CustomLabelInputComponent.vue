@@ -13,7 +13,10 @@ export default class CustomLabelInputComponent extends Vue {
   @Prop({ default: "label" })
   label!: string;
 
-  newInput: string = ''
+  @Prop({ default: '' })
+  value!: string;
+
+  newInput: string = this.value
 
   handleInput (e) {
       this.$emit('input', this.newInput)
