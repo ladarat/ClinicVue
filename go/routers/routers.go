@@ -33,5 +33,7 @@ func (r *Routes) Init() {
 	r.E.GET("/patient", handlers.GetPatientAll(r.Patient))
 	r.E.GET("/patient/:id", handlers.GetPatientByID(r.Patient))
 	r.E.DELETE("/patient/:id", handlers.DeletePatient(r.Patient))
+	r.E.PUT("/patient/:id", handlers.UpdatePatient(r.Patient))
+	
 
 }

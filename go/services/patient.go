@@ -1,6 +1,8 @@
 package services
 
 import (
+	"time"
+
 	mongo "github.com/ladarat/ClinicVue/go/mongo"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"gopkg.in/mgo.v2/bson"
@@ -22,6 +24,8 @@ func NewPatientService(md *mongo.MgoDatabase) PatientService {
 func (mp *mongoPatientService) Create(patient *Patient) (*Patient, error) {
 	coll := mp.md.MgoDatabase.Collection(patientCollection)
 	patient.ID = primitive.NewObjectID()
+	patient.CreatedAt = time.Now()
+	patient.UpdatedAt = time.Now()
 	_, err := coll.InsertOne(mp.md.Context, patient)
 	if err != nil {
 		return nil, err
@@ -83,7 +87,20 @@ func (mp *mongoPatientService) Delete(id string) error {
 	return nil
 }
 
-func (mp *mongoPatientService) Update(patient *Patient) error {
+func (mp *mongoPatientService) Update(patient *Patient, id string) (*Patient, error) {
+	coll := mp.md.MgoDatabase.Collection(patientCollection)
+	objID, err := primitive.ObjectIDFromHex(id)
+	if err != nil {
+		return nil, err
+	}
 
-	return nil
+	patient.UpdatedAt = time.Now()
+	_, err = coll.UpdateOne(mp.md.Context, bson.M{"_id": objID}, bson.M{
+		"$set": patient,
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	return patient, nil
 }

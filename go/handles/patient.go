@@ -47,6 +47,8 @@ type PatientResponse struct {
 	DrugAllergy       string             `json:"drug_allergy"`
 	EmergencyContact  string             `json:"emergency_contact"`
 	Relationship      string             `json:"relationship"`
+	CreatedAt         time.Time          `json:"created_at,omitempty"`
+	UpdatedAt         time.Time          `json:"updated_at,omitempty"`
 }
 
 // CreatePatient by POST /patient
@@ -97,17 +99,18 @@ func GetPatientByID(ps services.PatientService) echo.HandlerFunc {
 // UpdatePatient by PUT /patient
 func UpdatePatient(ps services.PatientService) echo.HandlerFunc {
 	return func(c echo.Context) error {
+		id := c.Param("id")
 		patient, err := toPatient(c)
 		if err != nil {
 			return echo.NewHTTPError(http.StatusExpectationFailed, err.Error())
 		}
 
-		err = ps.Update(patient)
+		p, err := ps.Update(patient, id)
 		if err != nil {
 			return echo.NewHTTPError(http.StatusExpectationFailed, err.Error())
 		}
 
-		return c.JSON(http.StatusOK, toPatientJSON(patient))
+		return c.JSON(http.StatusOK, toPatientJSON(p))
 	}
 }
 
@@ -163,5 +166,7 @@ func toPatientJSON(p *services.Patient) PatientResponse {
 	json.DrugAllergy = p.DrugAllergy
 	json.EmergencyContact = p.EmergencyContact
 	json.Relationship = p.Relationship
+	json.CreatedAt = p.CreatedAt
+	json.UpdatedAt = p.UpdatedAt
 	return json
 }

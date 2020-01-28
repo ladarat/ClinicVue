@@ -1,6 +1,10 @@
 package services
 
-import "go.mongodb.org/mongo-driver/bson/primitive"
+import (
+	"time"
+
+	"go.mongodb.org/mongo-driver/bson/primitive"
+)
 
 //Patient struct
 type Patient struct {
@@ -18,6 +22,8 @@ type Patient struct {
 	DrugAllergy       string             `bson:"drug_allergy"`
 	EmergencyContact  string             `bson:"emergency_contact"`
 	Relationship      string             `bson:"relationship"`
+	CreatedAt         time.Time          `bson:"created_at,omitempty"`
+	UpdatedAt         time.Time          `bson:"updated_at,omitempty"`
 }
 
 //PatientService is interface
@@ -26,5 +32,5 @@ type PatientService interface {
 	GetAll() ([]Patient, error)
 	GetByID(id string) (*Patient, error)
 	Delete(id string) error
-	Update(patient *Patient) error
+	Update(patient *Patient, id string) (*Patient, error)
 }
