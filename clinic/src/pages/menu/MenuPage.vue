@@ -45,7 +45,7 @@ export default class MenuPage extends Vue {
     },
     {
       title: 'เพิ่มข้อมูลผู้ป่วย',
-      to: ''
+      to: 'patient_create'
     },
     {
       title: 'พิมพ์ใบรับรองแพทย์',
