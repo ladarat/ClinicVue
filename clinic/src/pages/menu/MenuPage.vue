@@ -7,7 +7,7 @@
       <div>
         <template v-for="(menu, menuIndex) in menuList">
           <router-link :to="{ name: menu.to }" :key="`menu-${menuIndex}`">
-            <div>
+            <div class="menu-button">
               {{menu.title}}
             </div>
           </router-link>
@@ -16,6 +16,20 @@
     </div>
   </div>
 </template>
+
+<style lang="scss" scoped>
+  @import '../../assets/styles/theme';
+
+  .menu-button {
+    width: 200px;
+    height: 60px;
+    background-color: $secondary;
+    margin: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
 
 <script lang="ts">
 import Vue from 'vue'
