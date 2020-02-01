@@ -7,18 +7,17 @@
       <input type="text" class="form-control" v-model="username" />
       <div>{{passwordTitle}}</div>
       <input type="password" class="form-control" v-model="password" />
-      <button class="btn btn-primary mt-3" @click="login()">
-        {{signInBtnText}}
-      </button>
+      <button class="btn btn-primary mt-3" @click="login()">{{signInBtnText}}</button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import Component from 'vue-class-component';
+import Component from "vue-class-component";
 import UserService from "../../common/api/modules/user/user.service";
 import LoginRequest from "../../common/api/modules/user/models/LoginRequest";
+import { LOGIN } from "@/store/action.type";
 
 @Component
 export default class LoginPage extends Vue {
@@ -26,16 +25,16 @@ export default class LoginPage extends Vue {
   usernameTitle: string = "User Name:";
   passwordTitle: string = "Password:";
   signInBtnText: string = "Sign In";
-  username: string = '';
-  password: string = '';
+  username: string = "";
+  password: string = "";
   login() {
     let request: LoginRequest = {
       username: this.username,
       password: this.password
-    }
-    UserService.login(request).then(() => {
-      this.$router.push({ name: 'menu' })
-    })
+    };
+    this.$store
+      .dispatch(LOGIN, request)
+      .then(() => this.$router.push({ name: "menu" }));
   }
 }
 </script>
