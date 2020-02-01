@@ -4,7 +4,7 @@ import LoginRequest from '@/common/api/modules/user/models/LoginRequest';
 import UserService from '@/common/api/modules/user/user.service';
 import { LOGIN } from './action.type';
 import { SET_AUTH, SET_ERROR, PURGE_AUTH } from './mutations.type';
-import { RootState } from '.';
+import { RootState } from '../..';
 
 export interface AuthState {
     errors: any,

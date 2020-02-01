@@ -17,7 +17,7 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import UserService from "../../common/api/modules/user/user.service";
 import LoginRequest from "../../common/api/modules/user/models/LoginRequest";
-import { LOGIN } from "@/store/action.type";
+import { LOGIN } from "@/store/modules/auth/action.type";
 
 @Component
 export default class LoginPage extends Vue {

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex, { StoreOptions } from 'vuex';
 import patient from './modules/patient';
-import auth from './auth.module'
+import auth from './modules/auth';
 
 Vue.use(Vuex)
 
