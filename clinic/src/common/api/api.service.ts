@@ -1,15 +1,15 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import Vue from "vue";
 import VueAxios from "vue-axios";
 import { API_URL } from './config';
 
 const ApiService = {
-  init(){
+  init() {
     Vue.use(VueAxios,axios);
     Vue.axios.defaults.baseURL = API_URL;
   },
-  post(apiPath: string, body: any) {
-    return Vue.axios.post(apiPath, body);
+  post<R>(apiPath: string, request: any): Promise<AxiosResponse<R>> {
+    return Vue.axios.post<R>(apiPath, request);
   }
 
 }
