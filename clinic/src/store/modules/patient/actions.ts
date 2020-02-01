@@ -1,7 +1,7 @@
 
 import { ActionTree } from 'vuex';
 import { RootState } from '../..';
-import { PatientState } from '.';
+import { PatientState } from './state';
 import { SET_PATIENT_LIST } from './mutations.type';
 import Patient from '@/pages/patient/models/Patient';
 
