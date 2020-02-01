@@ -1,0 +1,1 @@
+export const PATIENT_NAMESPACE = "patient";

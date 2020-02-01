@@ -18,7 +18,7 @@ export default class CustomLabelInputComponent extends Vue {
 
   newInput: string = this.value
 
-  handleInput (e) {
+  handleInput () {
       this.$emit('input', this.newInput)
   }
 }

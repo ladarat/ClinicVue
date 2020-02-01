@@ -1,15 +1,21 @@
 import Vue from 'vue'
-import Vuex from 'vuex'
+import Vuex, { StoreOptions } from 'vuex';
+import patient from './patient.modules';
+import { PATIENT_NAMESPACE } from './modules.namespace';
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+export interface RootState {
+  version: string;
+}
+
+const store: StoreOptions<RootState> = {
   state: {
-  },
-  mutations: {
-  },
-  actions: {
+    version: '1.0.0'
   },
   modules: {
+    'patient': patient
   }
-})
+};
+
+export default new Vuex.Store<RootState>(store);
