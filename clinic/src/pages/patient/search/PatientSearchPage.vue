@@ -40,10 +40,9 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
 import { Action, State, Getter, Mutation, namespace } from 'vuex-class';
-import { PATIENT_NAMESPACE } from '@/store/modules.namespace';
-import { SEARCH_PATIENT } from '@/store/actions.type';
 
 import Patient from "../models/Patient";
+import { PATIENT_NAMESPACE } from '../../../store/modules.namespace'
 
 const PatientGetter = namespace(PATIENT_NAMESPACE, Getter);
 const PatientAction = namespace(PATIENT_NAMESPACE, Action);
@@ -51,7 +50,7 @@ const PatientAction = namespace(PATIENT_NAMESPACE, Action);
 @Component
 export default class PatientSearchPage extends Vue {
   @PatientAction searchPatient!: Function
-  @PatientGetter getSearchedPatient!: any
+  @PatientGetter getSearchedPatient!: Array<Patient>
 
   searchFullName: string = "";
   searchCitizenId: string = "";

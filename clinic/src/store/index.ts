@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuex, { StoreOptions } from 'vuex';
-import patient from './patient.modules';
-import { PATIENT_NAMESPACE } from './modules.namespace';
+import patient from './modules/patient';
 
 Vue.use(Vuex)
 
@@ -14,7 +13,7 @@ const store: StoreOptions<RootState> = {
     version: '1.0.0'
   },
   modules: {
-    'patient': patient
+    patient
   }
 };
 

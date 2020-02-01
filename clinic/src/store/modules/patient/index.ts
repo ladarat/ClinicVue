@@ -1,10 +1,9 @@
 
-import { Module, ActionTree, MutationTree, GetterTree } from 'vuex';
-import { RootState } from '.';
+import { Module, MutationTree, GetterTree } from 'vuex'
+import actions from './actions'
+import { RootState } from '../..'
 
-import {
-  SET_PATIENT_LIST
-} from "./mutations.type";
+import { SET_PATIENT_LIST } from './mutations.type'
 import Patient from '@/pages/patient/models/Patient';
 
 export interface PatientState {
@@ -17,17 +16,6 @@ export const state: PatientState = {
   error: false
 };
 
-
-export const actions: ActionTree<PatientState, RootState> = {
-  searchPatient({ commit }) {
-    const patient1: Patient = {
-      citizenId: "11111111111",
-      firstname: "boom",
-      lastname: "boom"
-    };
-    commit(SET_PATIENT_LIST, [patient1])
-  }
-};
 
 export const mutations: MutationTree<PatientState> = {
   [SET_PATIENT_LIST](state, payload: Array<Patient>) {
