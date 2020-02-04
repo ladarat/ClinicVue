@@ -1,11 +1,6 @@
 <template>
   <div class="container mx-auto py-4">
     <div class="text-center mb-4">Create Patient</div>
-    <custom-label-input label="ชื่อ-นามสกุล" v-model="name" />
-    <custom-select label="เพศ" :options="genderOptions" v-model="gender" />
-    {{ name }}
-    <br />
-    {{ gender }}
     <div class="row px-3 mt-2">
       <div class="col-12 mb-2">
         <custom-label-input label="ชื่อ-นามสกุล" v-model="name" />
@@ -73,6 +68,7 @@ import CustomSelectComponent from "@/shared/CustomSelectComponent.vue";
 export default class CreatePatientPage extends Vue {
   name: string = "firstname";
   gender: string = "";
+  dateOfBirth: string = ""
 
   genderOptions: Array<{ text: string; value: string }> = [
     {
