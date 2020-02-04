@@ -6,7 +6,7 @@
     {{ name }}
     <br />
     {{ gender }}
-    <div class="row mt-2">
+    <div class="row px-3 mt-2">
       <div class="col-12 mb-2">
         <custom-label-input label="ชื่อ-นามสกุล" v-model="name" />
       </div>
@@ -42,14 +42,16 @@
     </div>
     <hr />
     <div class="text-center mb-4">ติดต่อฉุกเฉิน</div>
-    <div class="col-12 mb-2">
-      <custom-label-input label="ผู้ติดต่อฉุกเฉิน" v-model="name" />
-    </div>
-    <div class="col-8 mb-2">
-      <custom-label-input label="ความสัมพันธ์" v-model="name" />
-    </div>
-    <div class="col-8 mb-2">
-      <custom-label-input label="โทร" v-model="name" />
+    <div class="row px-3">
+      <div class="col-12 mb-2">
+        <custom-label-input label="ผู้ติดต่อฉุกเฉิน" v-model="name" />
+      </div>
+      <div class="col-8 mb-2">
+        <custom-label-input label="ความสัมพันธ์" v-model="name" />
+      </div>
+      <div class="col-8 mb-2">
+        <custom-label-input label="โทร" v-model="name" />
+      </div>
     </div>
   </div>
 </template>
