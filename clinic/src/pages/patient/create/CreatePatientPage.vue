@@ -11,7 +11,9 @@
       <div class="col-7 mb-2">
         <custom-select label="เพศ" :options="genderOptions" v-model="gender" />
       </div>
-      <div class="col-12 mb-2">วันเกิด</div>
+      <div class="col-12 mb-2">
+        <custom-date-picker label="วันเกิด" v-model="dateOfBirth" />
+      </div>
       <div class="col-8 mb-2">
         <custom-label-input label="บัตรประชาชนลขที่" v-model="name" />
       </div>
@@ -58,17 +60,19 @@
 import { Prop, Component, Vue } from "vue-property-decorator";
 import CustomLabelInputComponent from "@/shared/CustomLabelInputComponent.vue";
 import CustomSelectComponent from "@/shared/CustomSelectComponent.vue";
+import CustomDatePickerComponent from "@/shared/CustomDatePickerComponent.vue";
 
 @Component({
   components: {
     "custom-label-input": CustomLabelInputComponent,
-    "custom-select": CustomSelectComponent
+    "custom-select": CustomSelectComponent,
+    "custom-date-picker": CustomDatePickerComponent
   }
 })
 export default class CreatePatientPage extends Vue {
   name: string = "firstname";
   gender: string = "";
-  dateOfBirth: string = ""
+  dateOfBirth: string = "";
 
   genderOptions: Array<{ text: string; value: string }> = [
     {
