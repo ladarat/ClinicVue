@@ -29,7 +29,9 @@
       <div class="col-12 mb-2">
         <custom-label-input label="ที่อยู่ที่ทำงาน" v-model="officeLocation" />
       </div>
-      <div class="col-12 mb-2">เอกสารที่ต้องการ</div>
+      <div class="col-12 mb-2">
+        <custom-radio-select label="เอกสารที่ต้องการ" :options="documentOptions" v-model="confirmDocumentType" />
+      </div>
       <div class="col-12 mb-2">
         <custom-label-input label="โรคประจำตัว" v-model="congenitalDisease" />
       </div>
@@ -61,12 +63,14 @@ import { Prop, Component, Vue } from "vue-property-decorator";
 import CustomLabelInputComponent from "@/shared/CustomLabelInputComponent.vue";
 import CustomSelectComponent from "@/shared/CustomSelectComponent.vue";
 import CustomDatePickerComponent from "@/shared/CustomDatePickerComponent.vue";
+import CustomRadioSelectComponent from "@/shared/CustomRadioSelectComponent.vue";
 
 @Component({
   components: {
     "custom-label-input": CustomLabelInputComponent,
     "custom-select": CustomSelectComponent,
-    "custom-date-picker": CustomDatePickerComponent
+    "custom-date-picker": CustomDatePickerComponent,
+    "custom-radio-select": CustomRadioSelectComponent
   }
 })
 export default class CreatePatientPage extends Vue {
@@ -94,6 +98,17 @@ export default class CreatePatientPage extends Vue {
     {
       text: "female",
       value: "female"
+    }
+  ];
+
+  documentOptions: Array<{ text: string; value: string }> = [
+    {
+      text: "ใบรับรองแพทย์",
+      value: "1"
+    },
+    {
+      text: "ใบประกันสังคม",
+      value: "2"
     }
   ];
 }
