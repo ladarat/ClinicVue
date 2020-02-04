@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto">
+  <div class="container mx-auto py-4">
     <div class="text-center mb-4">Create Patient</div>
     <custom-label-input label="ชื่อ-นามสกุล" v-model="name" />
     <custom-select label="เพศ" :options="genderOptions" v-model="gender" />
@@ -52,6 +52,9 @@
       <div class="col-8 mb-2">
         <custom-label-input label="โทร" v-model="name" />
       </div>
+    </div>
+    <div class="text-center">
+      <button class="btn btn-primary"> เพิ่ม </button>
     </div>
   </div>
 </template>
