@@ -1,50 +1,56 @@
 <template>
   <div class="container mx-auto">
-    <div class="mb-4">Create Patient</div>
+    <div class="text-center mb-4">Create Patient</div>
     <custom-label-input label="ชื่อ-นามสกุล" v-model="name" />
     <custom-select label="เพศ" :options="genderOptions" v-model="gender" />
     {{ name }}
-    <br>
+    <br />
     {{ gender }}
     <div class="row mt-2">
-      <div class="col-12">
+      <div class="col-12 mb-2">
         <custom-label-input label="ชื่อ-นามสกุล" v-model="name" />
       </div>
-      <div class="col-6">
+      <div class="col-5 mb-2">
         <custom-label-input label="ชื่อเล่น" v-model="name" />
       </div>
-      <div class="col-6">
+      <div class="col-7 mb-2">
         <custom-select label="เพศ" :options="genderOptions" v-model="gender" />
       </div>
-      <div class="col-12">
-        วันเกิด
-      </div>
-      <div class="col-8">
+      <div class="col-12 mb-2">วันเกิด</div>
+      <div class="col-8 mb-2">
         <custom-label-input label="บัตรประชาชนลขที่" v-model="name" />
       </div>
-      <div class="col-8">
+      <div class="col-8 mb-2">
         <custom-label-input label="อาชีพ" v-model="name" />
       </div>
-      <div class="col-8">
+      <div class="col-8 mb-2">
         <custom-label-input label="โทร" v-model="name" />
       </div>
-      <div class="col-12">
+      <div class="col-12 mb-2">
         <custom-label-input label="ที่อยู่ปัจจุบัน" v-model="name" />
       </div>
-      <div class="col-12">
+      <div class="col-12 mb-2">
         <custom-label-input label="ที่อยู่ที่ทำงาน" v-model="name" />
       </div>
-      <div class="col-12">
-        เอกสารที่ต้องการ
-      </div>
-      <div class="col-12">
+      <div class="col-12 mb-2">เอกสารที่ต้องการ</div>
+      <div class="col-12 mb-2">
         <custom-label-input label="โรคประจำตัว" v-model="name" />
       </div>
-      <div class="col-12">
+      <div class="col-12 mb-2">
         <custom-label-input label="แพ้ยา" v-model="name" />
       </div>
     </div>
-   <hr>
+    <hr />
+    <div class="text-center mb-4">ติดต่อฉุกเฉิน</div>
+    <div class="col-12 mb-2">
+      <custom-label-input label="ผู้ติดต่อฉุกเฉิน" v-model="name" />
+    </div>
+    <div class="col-8 mb-2">
+      <custom-label-input label="ความสัมพันธ์" v-model="name" />
+    </div>
+    <div class="col-8 mb-2">
+      <custom-label-input label="โทร" v-model="name" />
+    </div>
   </div>
 </template>
 
