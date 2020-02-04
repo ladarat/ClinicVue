@@ -6,6 +6,45 @@
     {{ name }}
     <br>
     {{ gender }}
+    <div class="row">
+      <div class="col-12">
+        <custom-label-input label="ชื่อ-นามสกุล" v-model="name" />
+      </div>
+      <div class="col-6">
+        <custom-label-input label="ชื่อเล่น" v-model="name" />
+      </div>
+      <div class="col-6">
+        <custom-select label="เพศ" :options="genderOptions" v-model="gender" />
+      </div>
+      <div class="col-12">
+        วันเกิด
+      </div>
+      <div class="col-8">
+        <custom-label-input label="บัตรประชาชนลขที่" v-model="name" />
+      </div>
+      <div class="col-8">
+        <custom-label-input label="อาชีพ" v-model="name" />
+      </div>
+      <div class="col-8">
+        <custom-label-input label="โทร" v-model="name" />
+      </div>
+      <div class="col-12">
+        <custom-label-input label="ที่อยู่ปัจจุบัน" v-model="name" />
+      </div>
+      <div class="col-12">
+        <custom-label-input label="ที่อยู่ที่ทำงาน" v-model="name" />
+      </div>
+      <div class="col-12">
+        เอกสารที่ต้องการ
+      </div>
+      <div class="col-12">
+        <custom-label-input label="โรคประจำตัว" v-model="name" />
+      </div>
+      <div class="col-12">
+        <custom-label-input label="แพ้ยา" v-model="name" />
+      </div>
+    </div>
+   <hr>
   </div>
 </template>
 
