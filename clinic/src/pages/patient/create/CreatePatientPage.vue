@@ -1,12 +1,12 @@
 <template>
-  <div>
-    Create Patient
+  <div class="container mx-auto">
+    <div class="mb-4">Create Patient</div>
     <custom-label-input label="ชื่อ-นามสกุล" v-model="name" />
     <custom-select label="เพศ" :options="genderOptions" v-model="gender" />
     {{ name }}
     <br>
     {{ gender }}
-    <div class="row">
+    <div class="row mt-2">
       <div class="col-12">
         <custom-label-input label="ชื่อ-นามสกุล" v-model="name" />
       </div>
