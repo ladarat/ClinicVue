@@ -34,7 +34,8 @@ export default class LoginPage extends Vue {
     };
     this.$store
       .dispatch(LOGIN, request)
-      .then(() => this.$router.push({ name: "menu" }));
+      .then(() => this.$router.push({ name: "menu" })
+      )
   }
 }
 </script>
