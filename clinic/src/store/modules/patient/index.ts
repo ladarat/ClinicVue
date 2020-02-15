@@ -7,10 +7,9 @@ import { getters } from './getters'
 import { RootState } from '../..'
 
 
-const namespaced: boolean = true;
+const namespaced: boolean = false;
 
 export const patientStoreModule: Module<PatientState, RootState> = {
-  namespaced,
   state,
   getters,
   actions,

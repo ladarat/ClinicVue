@@ -2,6 +2,7 @@
 import { ActionTree } from 'vuex';
 import { RootState } from '../..';
 import { PatientState } from './state';
+import { CREATE_PATIENT } from './action.type';
 import { SET_PATIENT_LIST } from './mutations.type';
 import Patient from '@/pages/patient/models/Patient';
 
@@ -29,16 +30,19 @@ const patientToCreatePatientRequest = (patient: Patient): CreatePatientRequest =
 
 export const actions: ActionTree<PatientState, RootState> = {
   searchPatient({ commit }) {
-    // const patient1: Patient = {
-    //   citizenId: '11111111111',
-    //   firstname: 'boom',
-    //   lastname: 'boom'
-    // };
     // commit(SET_PATIENT_LIST, [patient1])
   },
-  async createPatient(context: any, patient: Patient) {
+  [CREATE_PATIENT](context: any, patient: Patient) {
     const createPatientRequest = patientToCreatePatientRequest(patient)
-    await PatientService.createPatient(createPatientRequest)
+    return new Promise((resolve) => {
+      PatientService.createPatient(createPatientRequest)
+        .then((res) => {
+          resolve(res.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    })
   }
 };
 
