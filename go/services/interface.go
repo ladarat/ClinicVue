@@ -22,6 +22,7 @@ type Patient struct {
 	DrugAllergy       string             `bson:"drug_allergy"`
 	EmergencyContact  string             `bson:"emergency_contact"`
 	Relationship      string             `bson:"relationship"`
+	CitizenID         string             `bson:"citizen_id"`
 	CreatedAt         time.Time          `bson:"created_at,omitempty"`
 	UpdatedAt         time.Time          `bson:"updated_at,omitempty"`
 }
