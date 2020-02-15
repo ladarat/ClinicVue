@@ -2,8 +2,11 @@
   <div class="container mx-auto py-4">
     <div class="text-center mb-4">Create Patient</div>
     <div class="row px-3 mt-2">
-      <div class="col-12 mb-2">
-        <custom-label-input label="ชื่อ-นามสกุล" v-model="name" />
+      <div class="col-6 mb-2">
+        <custom-label-input label="ชื่อ" v-model="firstname" />
+      </div>
+      <div class="col-6 mb-2">
+        <custom-label-input label="นามสกุล" v-model="lastname" />
       </div>
       <div class="col-5 mb-2">
         <custom-label-input label="ชื่อเล่น" v-model="nickname" />
@@ -53,17 +56,20 @@
       </div>
     </div>
     <div class="text-center">
-      <button class="btn btn-primary"> เพิ่ม </button>
+      <button class="btn btn-primary" @click="createPatient()"> เพิ่ม </button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Prop, Component, Vue } from "vue-property-decorator";
+import Patient from "../models/Patient";
 import CustomLabelInputComponent from "@/shared/CustomLabelInputComponent.vue";
 import CustomSelectComponent from "@/shared/CustomSelectComponent.vue";
 import CustomDatePickerComponent from "@/shared/CustomDatePickerComponent.vue";
 import CustomRadioSelectComponent from "@/shared/CustomRadioSelectComponent.vue";
+
+import { CREATE_PATIENT } from "../../../store/modules/patient/action.type";
 
 @Component({
   components: {
@@ -74,7 +80,8 @@ import CustomRadioSelectComponent from "@/shared/CustomRadioSelectComponent.vue"
   }
 })
 export default class CreatePatientPage extends Vue {
-  name: string = ""
+  firstname: string = ""
+  lastname: string = ""
   nickname: string = ""
   gender: string = "male"
   dateOfBirth: string = ""
@@ -111,5 +118,29 @@ export default class CreatePatientPage extends Vue {
       value: "2"
     }
   ];
+
+  createPatient() {
+    const patient: Patient = {
+      firstname: this.firstname,
+      lastname: this.lastname,
+      nickname: this.nickname,
+      sex: this.gender,
+      carreer: this.job,
+      phoneNumber: this.phoneNumber,
+      currentAddress: this.currentLocation,
+      workAddress: this.officeLocation,
+      requiredDocuments: this.confirmDocumentType,
+      congenitalDisease: this.congenitalDisease,
+      drugAllergy: this.allergicMedicine,
+      emergencyContact: `${this.urgentContactName}|${this.urgentContactRelation}|${this.urgentContactPhoneNumber}`,
+      relationship: this.urgentContactRelation,
+      citizenId: this.citizenId,
+    }
+    this.$store
+    .dispatch(CREATE_PATIENT, patient)
+    .then(() => {
+      console.log("OK");
+    })
+  }
 }
 </script>
