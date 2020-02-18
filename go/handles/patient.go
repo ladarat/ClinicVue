@@ -7,8 +7,6 @@ import (
 	"github.com/labstack/echo"
 	services "github.com/ladarat/ClinicVue/go/services"
 	models "github.com/ladarat/ClinicVue/go/models"
-
-	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 // Now is time now
