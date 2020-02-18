@@ -68,6 +68,7 @@ import CustomLabelInputComponent from "@/shared/CustomLabelInputComponent.vue";
 import CustomSelectComponent from "@/shared/CustomSelectComponent.vue";
 import CustomDatePickerComponent from "@/shared/CustomDatePickerComponent.vue";
 import CustomRadioSelectComponent from "@/shared/CustomRadioSelectComponent.vue";
+import Swal from 'sweetalert2'
 
 import { CREATE_PATIENT } from "../../../store/modules/patient/action.type";
 
@@ -77,6 +78,19 @@ import { CREATE_PATIENT } from "../../../store/modules/patient/action.type";
     "custom-select": CustomSelectComponent,
     "custom-date-picker": CustomDatePickerComponent,
     "custom-radio-select": CustomRadioSelectComponent
+  },
+  beforeRouteLeave: (to, from, next) => {
+    next(false)
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true
+    }).then((result) => {
+      if (result.value) {
+        next()
+      }
+    })
   }
 })
 export default class CreatePatientPage extends Vue {
