@@ -16,40 +16,41 @@ var Now = time.Now()
 
 // PatientRequest struct
 type PatientRequest struct {
-	ID                primitive.ObjectID `json:"id"`
-	Firstname         string             `json:"firstname"`
-	Lastname          string             `json:"lastname"`
-	Nickname          string             `json:"nickname"`
-	Sex               string             `json:"sex"`
-	Career            string             `json:"career"`
-	PhoneNumber       string             `json:"phone_number"`
-	CurrentAddress    string             `json:"current_address"`
-	WorkAddress       string             `json:"work_address"`
-	RequiredDocuments string             `json:"required_documents"`
-	CongenitalDisease string             `json:"congenital_disease"`
-	DrugAllergy       string             `json:"drug_allergy"`
-	EmergencyContact  string             `json:"emergency_contact"`
-	Relationship      string             `json:"relationship"`
+	Firstname         string `json:"firstname"`
+	Lastname          string `json:"lastname"`
+	Nickname          string `json:"nickname"`
+	Sex               string `json:"sex"`
+	Career            string `json:"career"`
+	PhoneNumber       string `json:"phone_number"`
+	CurrentAddress    string `json:"current_address"`
+	WorkAddress       string `json:"work_address"`
+	RequiredDocuments string `json:"required_documents"`
+	CongenitalDisease string `json:"congenital_disease"`
+	DrugAllergy       string `json:"drug_allergy"`
+	EmergencyContact  string `json:"emergency_contact"`
+	Relationship      string `json:"relationship"`
+	CitizenID         string `json:"citizen_id"`
 }
 
 // PatientResponse struct
 type PatientResponse struct {
-	ID                primitive.ObjectID `json:"id"`
-	Firstname         string             `json:"firstname"`
-	Lastname          string             `json:"lastname"`
-	Nickname          string             `json:"nickname"`
-	Sex               string             `json:"sex"`
-	Career            string             `json:"career"`
-	PhoneNumber       string             `json:"phone_number"`
-	CurrentAddress    string             `json:"current_address"`
-	WorkAddress       string             `json:"work_address"`
-	RequiredDocuments string             `json:"required_documents"`
-	CongenitalDisease string             `json:"congenital_disease"`
-	DrugAllergy       string             `json:"drug_allergy"`
-	EmergencyContact  string             `json:"emergency_contact"`
-	Relationship      string             `json:"relationship"`
-	CreatedAt         time.Time          `json:"created_at,omitempty"`
-	UpdatedAt         time.Time          `json:"updated_at,omitempty"`
+	ID                string    `json:"id"`
+	Firstname         string    `json:"firstname"`
+	Lastname          string    `json:"lastname"`
+	Nickname          string    `json:"nickname"`
+	Sex               string    `json:"sex"`
+	Career            string    `json:"career"`
+	PhoneNumber       string    `json:"phone_number"`
+	CurrentAddress    string    `json:"current_address"`
+	WorkAddress       string    `json:"work_address"`
+	RequiredDocuments string    `json:"required_documents"`
+	CongenitalDisease string    `json:"congenital_disease"`
+	DrugAllergy       string    `json:"drug_allergy"`
+	EmergencyContact  string    `json:"emergency_contact"`
+	Relationship      string    `json:"relationship"`
+	CitizenID         string    `json:"citizen_id"`
+	CreatedAt         time.Time `json:"created_at,omitempty"`
+	UpdatedAt         time.Time `json:"updated_at,omitempty"`
 }
 
 // CreatePatient by POST /patient
@@ -135,7 +136,6 @@ func toPatient(c echo.Context) (*models.Patient, error) {
 
 	var patient models.Patient
 
-	patient.ID = patientReq.ID
 	patient.Nickname = patientReq.Nickname
 	patient.Firstname = patientReq.Firstname
 	patient.Lastname = patientReq.Lastname
@@ -154,7 +154,7 @@ func toPatient(c echo.Context) (*models.Patient, error) {
 
 func toPatientJSON(p *models.Patient) PatientResponse {
 	json := PatientResponse{}
-	json.ID = p.ID
+	json.ID = p.ID.Hex()
 	json.Nickname = p.Nickname
 	json.Firstname = p.Firstname
 	json.Lastname = p.Lastname

@@ -4,7 +4,7 @@ import LoginResponse from './models/LoginRersponse'
 
 const UserService = {
   login(loginRequest: LoginRequest) {
-    return ApiService.post<LoginResponse>('', loginRequest)
+    return ApiService.post<LoginResponse>('login', loginRequest)
   }
 }
 
