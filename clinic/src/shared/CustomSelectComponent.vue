@@ -1,6 +1,6 @@
 <template>
   <div>
-    <label>{{ label }}</label>
+    <label class="mr-3">{{ label }}</label>
     <select v-model="newInput" @change="handleInput">
       <option v-for="(item,index) in options" :key="index" :value="item.value">
           {{item.text}}

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <label>{{ label }}</label>
+    <label class="mr-3">{{ label }}</label>
     <input type="text" v-model="newInput" @input="handleInput"/>
   </div>
 </template>

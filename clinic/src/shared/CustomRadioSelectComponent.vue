@@ -1,6 +1,6 @@
 <template>
   <div>
-    <label>{{ label }}</label>
+    <label class="mr-3">{{ label }}</label>
     <template v-for="(item, index) in options">
       <input
         type="radio"
