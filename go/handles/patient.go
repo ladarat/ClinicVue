@@ -6,6 +6,7 @@ import (
 
 	"github.com/labstack/echo"
 	services "github.com/ladarat/ClinicVue/go/services"
+	models "github.com/ladarat/ClinicVue/go/models"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
@@ -126,13 +127,13 @@ func DeletePatient(ps services.PatientService) echo.HandlerFunc {
 	}
 }
 
-func toPatient(c echo.Context) (*services.Patient, error) {
+func toPatient(c echo.Context) (*models.Patient, error) {
 	var patientReq PatientRequest
 	if err := c.Bind(&patientReq); err != nil {
 		return nil, echo.NewHTTPError(http.StatusExpectationFailed, err.Error())
 	}
 
-	var patient services.Patient
+	var patient models.Patient
 
 	patient.ID = patientReq.ID
 	patient.Nickname = patientReq.Nickname
@@ -151,7 +152,7 @@ func toPatient(c echo.Context) (*services.Patient, error) {
 	return &patient, nil
 }
 
-func toPatientJSON(p *services.Patient) PatientResponse {
+func toPatientJSON(p *models.Patient) PatientResponse {
 	json := PatientResponse{}
 	json.ID = p.ID
 	json.Nickname = p.Nickname

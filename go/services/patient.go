@@ -1,32 +1,23 @@
 package services
 
 import (
-	"time"
-
-	mongo "github.com/ladarat/ClinicVue/go/mongo"
-	"go.mongodb.org/mongo-driver/bson/primitive"
-	"gopkg.in/mgo.v2/bson"
+	models "github.com/ladarat/ClinicVue/go/models"
+	repository "github.com/ladarat/ClinicVue/go/repository"
 )
 
-type mongoPatientService struct {
-	md *mongo.MgoDatabase
+type patientService struct {
+	patientRepo repository.PatientRepository
 }
 
-const patientCollection = "patient"
-
-// NewPatientService will create and return
-func NewPatientService(md *mongo.MgoDatabase) PatientService {
-	return &mongoPatientService{
-		md: md,
+// NewPatientService is service
+func NewPatientService(patientRepo repository.PatientRepository) PatientService {
+	return &patientService{
+		patientRepo: patientRepo,
 	}
 }
 
-func (mp *mongoPatientService) Create(patient *Patient) (*Patient, error) {
-	coll := mp.md.MgoDatabase.Collection(patientCollection)
-	patient.ID = primitive.NewObjectID()
-	patient.CreatedAt = time.Now()
-	patient.UpdatedAt = time.Now()
-	_, err := coll.InsertOne(mp.md.Context, patient)
+func (ps *patientService) Create(patient *models.Patient) (*models.Patient, error) {
+	patient, err := ps.patientRepo.Create(patient)
 	if err != nil {
 		return nil, err
 	}
@@ -34,52 +25,26 @@ func (mp *mongoPatientService) Create(patient *Patient) (*Patient, error) {
 	return patient, nil
 }
 
-func (mp *mongoPatientService) GetAll() ([]Patient, error) {
-	coll := mp.md.MgoDatabase.Collection(patientCollection)
-	patientList := []Patient{}
-	p := Patient{}
-	cursor, err := coll.Find(mp.md.Context, bson.M{})
+func (ps *patientService) GetAll() ([]models.Patient, error) {
+	patients, err := ps.patientRepo.GetAll()
 	if err != nil {
 		return nil, err
 	}
 
-	for cursor.Next(mp.md.Context) {
-		cursor.Decode(&p)
-		patientList = append(patientList, p)
-	}
-
-	return patientList, nil
+	return patients, nil
 }
 
-func (mp *mongoPatientService) GetByID(id string) (*Patient, error) {
-	coll := mp.md.MgoDatabase.Collection(patientCollection)
-	objID, err := primitive.ObjectIDFromHex(id)
+func (ps *patientService) GetByID(id string) (*models.Patient, error) {
+	patient, err := ps.patientRepo.GetByID(id)
 	if err != nil {
 		return nil, err
 	}
 
-	findResult := coll.FindOne(mp.md.Context, bson.M{"_id": objID})
-	if err := findResult.Err(); err != nil {
-		return nil, err
-	}
-
-	p := Patient{}
-	err = findResult.Decode(&p)
-	if err != nil {
-		return nil, err
-	}
-
-	return &p, nil
+	return patient, nil
 }
 
-func (mp *mongoPatientService) Delete(id string) error {
-	coll := mp.md.MgoDatabase.Collection(patientCollection)
-	objID, err := primitive.ObjectIDFromHex(id)
-	if err != nil {
-		return err
-	}
-
-	_, err = coll.DeleteOne(mp.md.Context, bson.M{"_id": objID})
+func (ps *patientService) Delete(id string) error {
+	err := ps.patientRepo.Delete(id)
 	if err != nil {
 		return err
 	}
@@ -87,20 +52,11 @@ func (mp *mongoPatientService) Delete(id string) error {
 	return nil
 }
 
-func (mp *mongoPatientService) Update(patient *Patient, id string) (*Patient, error) {
-	coll := mp.md.MgoDatabase.Collection(patientCollection)
-	objID, err := primitive.ObjectIDFromHex(id)
+func (ps *patientService) Update(patient *models.Patient, id string) (*models.Patient, error) {
+	patients, err := ps.patientRepo.Update(patient, id)
 	if err != nil {
 		return nil, err
 	}
 
-	patient.UpdatedAt = time.Now()
-	_, err = coll.UpdateOne(mp.md.Context, bson.M{"_id": objID}, bson.M{
-		"$set": patient,
-	})
-	if err != nil {
-		return nil, err
-	}
-
-	return patient, nil
+	return patients, nil
 }
