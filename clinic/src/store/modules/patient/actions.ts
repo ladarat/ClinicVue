@@ -39,9 +39,7 @@ export const actions: ActionTree<PatientState, RootState> = {
         .then((res) => {
           resolve(res.data)
         })
-        .catch((err) => {
-          console.log(err)
-        })
+        .catch((err) => {})
     })
   }
 };

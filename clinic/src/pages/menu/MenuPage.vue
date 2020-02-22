@@ -1,7 +1,7 @@
 <template>
   <div class="menu-page">
     <div class="text-center">
-      <div>
+      <div id="menu-title">
         {{ menuTitle }}
       </div>
       <div>

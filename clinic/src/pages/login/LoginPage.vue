@@ -1,13 +1,13 @@
 <template>
   <div class="login-page">
     <div class="container">
-      <div>{{loginTitle}}</div>
+      <div id="login-title">{{loginTitle}}</div>
       <hr />
       <div>{{usernameTitle}}</div>
-      <input type="text" class="form-control" v-model="username" />
+      <input id="username-input" type="text" class="form-control" v-model="username" />
       <div>{{passwordTitle}}</div>
-      <input type="password" class="form-control" v-model="password" />
-      <button class="btn btn-primary mt-3" @click="login()">{{signInBtnText}}</button>
+      <input id="password-input" type="password" class="form-control" v-model="password" />
+      <button id="login-button" class="btn btn-primary mt-3" @click="login()">{{signInBtnText}}</button>
     </div>
   </div>
 </template>
