@@ -12,7 +12,7 @@
         <input v-model="searchCitizenId" type="text" />
       </div>
       <div class="col-4">
-        <button @click="searchPatient()" class="btn btn-primary">Search</button>
+        <button @click="clickSearch()" class="btn btn-primary">Search</button>
       </div>
     </div>
     <hr />
@@ -57,6 +57,10 @@ export default class PatientSearchPage extends Vue {
 
   goToPatientDetail(patient: Patient) {
     this.$swal(patient.firstname);
+  }
+  
+  clickSearch(){
+    this.searchPatient()
   }
 
 }
